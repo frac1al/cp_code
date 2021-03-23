@@ -107,9 +107,18 @@ struct point {
 		return point(x * c - y * s, x * s + y * c);
 	}
 	
+	point operator*(const ld c) {
+		return point(x * c, y * c);
+	}
+	
+	point operator/(const ld c) {
+		return point(x / c, y / c);
+	}
+	
 	point operator+(const point a) {
 		return point(x + a.x, y + a.y);
 	}
+		
 	
 	point operator-(const point a) {
 		return point(x - a.x, y - a.y);
@@ -147,6 +156,14 @@ struct line {
 	line (point A, point B) {
 		B = B - A;
 		a = B.y, b = -B.x, c = B.x * A.y - B.y * A.x;
+	}
+	
+	point norm() {
+		return point(a, b);
+	}
+	
+	point vec() {
+		return point(-b, a);
 	}
 	
 	void get(point &A, point &B) {
