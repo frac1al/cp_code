@@ -178,7 +178,7 @@ struct line {
 	}
 };
 
-ld get_dist(point a, point b, point c) {
+ld get_dist_from_point_to_segment(point a, point b, point c) {
 	point d = c - b;
 	if ((a - c) % d >= 0.0) {
 		return dist(a, c);
@@ -192,7 +192,7 @@ ld get_dist(point a, point b, point c) {
 	}
 }
 
-bool inter(point a, point b, point c, point d) {
+bool is_intersect_segments(point a, point b, point c, point d) {
 	point A = c - a, B = b - a, C = d - a;
 	if (A * C == 0)
 		return (A % C <= 0);
@@ -206,7 +206,7 @@ bool inter(point a, point b, point c, point d) {
 		return false;
 }
 
-bool inter(line a, line b, point &p) {
+bool intersect_lines(line a, line b, point &p) {
 	a.c = -a.c; b.c = -b.c;
 	ld det = (a.a * b.b - a.b * b.a);
 	swap(a.a, b.b);
