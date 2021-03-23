@@ -1,7 +1,7 @@
 /**
  *	author:	 fractal
  *	timus: 	 288481RF
- *	created: _
+ *	created: 03/23/21 23:38
 **/
 
 #include <bits/stdc++.h>
@@ -51,7 +51,7 @@ const int mod = 0;
 const int inf = 2e9 + 3;
 const ll INF = 1e18;
 const ld pi2 = 2.0 * 3.141592;
-const ld pi2 = 3.141592;
+const ld pi = 3.141592;
 
 const int dx[4] = {1, -1, 0, 0};
 const int dy[4] = {0, 0, -1, 1};
