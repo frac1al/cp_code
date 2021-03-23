@@ -84,9 +84,9 @@ int binpow(int a, int n) {
 }
 
 struct point {
-	ll x, y;
+	ld x, y;
 	
-	point (ll x = 0.0, ll y = 0.0) : x(x), y(y) {}
+	point (ld x = 0.0, ld y = 0.0) : x(x), y(y) {}
 	
 	point norm() {
 		return point(-y, x);
@@ -134,6 +134,72 @@ struct point {
 			return pi + asin(-y / this->l());
 	}
 };
+
+ld dist(point a, point b) {
+	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
+struct line {
+	ld a, b, c;
+	
+	line (ld a = 0.0, ld b = 0.0, ld c = 0.0) : a(a), b(b), c(c) {}
+	
+	line (point A, point B) {
+		B = B - A;
+		a = B.y, b = -B.x, c = B.x * A.y - B.y * A.x;
+	}
+	
+	void get(point &A, point &B) {
+		if (b != 0.0) {
+			A = {0.0, -c / b};
+			B = {1.0, (-c - a) / b};
+		}
+		else {
+			A = {-c / a, 0.0};
+			B = {-c / a, 1.0};
+		}
+	}
+};
+
+ld get_dist(point a, point b, point c) {
+	point d = c - b;
+	if ((a - c) % d >= 0.0) {
+		return dist(a, c);
+	}
+	else if ((a - b) % d <= 0.0) {
+		return dist(a, b);
+	}
+	else {
+		a = a - b;
+		return abs(a * d) / d.l();
+	}
+}
+
+bool inter(point a, point b, point c, point d) {
+	point A = c - a, B = b - a, C = d - a;
+	if (A * C == 0)
+		return (A % C <= 0);
+	ll v1 = abs(A * C), v2 = abs(A * B), v3 = abs(B * C), v4 = abs((c - b) * (d - b));
+	if ((A * C > 0) == (A * B >= 0) && (A * C > 0) == (B * C >= 0))
+		if (v1 == v2 + v3 + v4)
+			return (v4 == 0);
+		else
+			return true;
+	else
+		return false;
+}
+
+bool inter(line a, line b, point &p) {
+	a.c = -a.c; b.c = -b.c;
+	ld det = (a.a * b.b - a.b * b.a);
+	swap(a.a, b.b);
+	swap(a.b, b.a);
+	a.b = -a.b;	b.a = -b.a;
+	swap(b.a, a.b);
+	p.x = (a.c * a.a + b.c * a.b) / det;	
+	p.y = (a.c * b.a + b.c * b.b) / det;	
+	return true;
+}
 
 int main() {
 
