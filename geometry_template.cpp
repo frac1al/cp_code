@@ -86,7 +86,7 @@ int binpow(int a, int n) {
 struct point {
 	ld x, y;
 	
-	point (ld x = 0.0, ld y = 0.0) : x(x), y(y) {}
+	point (ld x = 0, ld y = 0) : x(x), y(y) {}
 	
 	point norm() {
 		return point(-y, x);
@@ -130,6 +130,16 @@ struct point {
 	
 	ll operator%(const point a) {
 		return x * a.x + y * a.y;
+	}
+	
+	bool operator<(const point a) {
+		if (x == a.x)
+			return y < a.y;
+		return x < a.x;
+	}
+	
+	bool operator==(const point a) {
+		return x == a.x && y == a.y;
 	}
 	
 	ld polar() {
