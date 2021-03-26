@@ -1,7 +1,7 @@
 /**
  *	author:	 fractal
  *	timus: 	 288481RF
- *  	created: 03/23/21 19:37
+ *	created: 03/26/21 18:58
 **/
 
 #include <bits/stdc++.h>
@@ -52,6 +52,7 @@ const int inf = 2e9 + 3;
 const ll INF = 1e18;
 const ld pi2 = 2.0 * 3.14159265359;
 const ld pi = 3.14159265359;
+const ld eps = 1e-12;
 
 const int dx[4] = {1, -1, 0, 0};
 const int dy[4] = {0, 0, -1, 1};
@@ -133,13 +134,13 @@ struct point {
 	}
 	
 	bool operator<(const point a) {
-		if (x == a.x)
-			return y < a.y;
-		return x < a.x;
+		if (fabs(x - a.x) < eps)
+			return y - a.y < eps;
+		return x - a.x < eps;
 	}
 	
 	bool operator==(const point a) {
-		return x == a.x && y == a.y;
+		return fabs(x - a.x) < eps && fabs(y - a.y) < eps;
 	}
 	
 	ld polar() {
@@ -185,6 +186,21 @@ struct line {
 			A = {-c / a, 0.0};
 			B = {-c / a, 1.0};
 		}
+	}
+	
+	bool is_parallel(line l) {
+		return (fabs(a * l.b - b * l.a) < eps);
+	}
+	
+	int cross(line l, point &p) {
+		if (this->is_parallel(l)) {
+			if (a * l.c - c * l.a < eps)
+				return -1;
+			return 0;
+		}
+		p.x = (l.b * c - b * l.c) / (l.a * b - a * l.b);
+		p.y = (l.a * c - a * l.c) / (a * l.b - l.a * b);
+		return 1;
 	}
 };
 
