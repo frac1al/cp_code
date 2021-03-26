@@ -52,6 +52,7 @@ const int inf = 2e9 + 3;
 const ll INF = 1e18;
 const ld pi2 = 2.0 * 3.14159265359;
 const ld pi = 3.14159265359;
+const ld eps = 1e-12;
 
 const int dx[4] = {1, -1, 0, 0};
 const int dy[4] = {0, 0, -1, 1};
