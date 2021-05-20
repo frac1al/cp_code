@@ -1,7 +1,6 @@
 /**
  *	author:	 fractal
  *	timus: 	 288481RF
- *	created: _
 **/
 
 #include <bits/stdc++.h>
@@ -23,7 +22,7 @@ using namespace std;
 #define lb lower_bound 
 #define nl printf("\n");
 #define clbuff fflush(stdin);
-#define make_unique(x) sort(all(x)), x.erase(unique(x), x.end())
+#define make_unique(x) sort(all(x)), x.erase(unique(all(x)), x.end())
 
 mt19937 bruh(chrono::steady_clock::now().time_since_epoch().count());
 mt19937_64 rofl(chrono::steady_clock::now().time_since_epoch().count());
